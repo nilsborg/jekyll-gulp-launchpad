@@ -1,7 +1,8 @@
 .DS_Store
-.sass-cache
 dev
 prod
 src/assets/css/screen.css
 node_modules
 .publish
+.sass-cache/
+.jekyll-metadata
