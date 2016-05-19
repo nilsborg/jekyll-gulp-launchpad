@@ -1,0 +1,34 @@
+{
+  "name": "launchpad",
+  "version": "0.0.1",
+  "description": "A jekyll/gulp boilerplate to quickly get up and running with static pages to deploy to Github pages for example",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.12.3",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-size": "^2.1.0",
+    "node-normalize-scss": "^1.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nilsborchers/jekyll-gulp-launchpad.git"
+  },
+  "keywords": [
+    "jekyll",
+    "gulp",
+    "npm",
+    "gh-pages"
+  ],
+  "author": "Nils Borchers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nilsborchers/jekyll-gulp-launchpad/issues"
+  },
+  "homepage": "https://github.com/nilsborchers/jekyll-gulp-launchpad#readme"
+}

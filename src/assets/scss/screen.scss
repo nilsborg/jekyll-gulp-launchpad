@@ -1,0 +1,11 @@
+/**
+ * This is the main scss file which includes your
+ * various variables and partials and whatever else you might
+ * need.
+ *
+ * Gulp will compile this over to ../css/screen.css (instead of
+ * leaving this job to jekyll, because we love browsersync
+ * and the flexibility of gulp)
+ */
+
+@import "normalize";
