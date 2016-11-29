@@ -1,11 +1,13 @@
-var gulp = require('gulp');
-var shell = require('gulp-shell');
-var del = require("del");
-var browserSync = require('browser-sync').create();
-var sass = require("gulp-sass");
-var notify = require("gulp-notify");
-var size = require("gulp-size");
-var ghPages = require('gulp-gh-pages');
+const gulp = require('gulp');
+const shell = require('gulp-shell');
+const del = require("del");
+const browserSync = require('browser-sync').create();
+const sass = require("gulp-sass");
+const notify = require("gulp-notify");
+const size = require("gulp-size");
+const ghPages = require('gulp-gh-pages');
+const autoprefixer = require('gulp-autoprefixer');
+const hashsum = require("gulp-hashsum");
 
 /**
  * Building Jekyll Site
@@ -70,6 +72,21 @@ gulp.task("styles", function () {
     .pipe(size({title: "styles"}))
     // Injects the CSS changes to your browser since Jekyll doesn"t rebuild the CSS
     .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task("styles:prod", function () {
+  return gulp.src("src/assets/scss/*.scss")
+    .pipe(sass({
+      includePaths: require('node-normalize-scss').includePaths,
+      outputStyle: 'compressed'
+    }))
+    .pipe(autoprefixer({
+      browsers: ['last 4 versions'],
+      cascade: false
+    }))
+    .pipe(hashsum({filename: 'src/_data/cache_css.yml', hash: 'md5'}))
+    .pipe(gulp.dest("src/assets/css/"))
+    .pipe(size({title: "styles"}));
 });
 
 /**
