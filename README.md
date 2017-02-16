@@ -11,7 +11,6 @@ This thing uses:
 - Browsersync
 - Sass
 - Normalize
-- Github Pages for quick deploys
 
 ## Setting up
 
@@ -20,9 +19,8 @@ This thing uses:
 3. Get all the needed node modules with `npm install`
 4. Fire the whole thing up: `gulp` (Google Chrome opens, everythings waiting for you to change `.md`, `.html`, `.scss`, etc etc and will auto reload everything)
 
-## Deploying to Github pages
+## Building
 
-I included this fancy node module `gulp-gh-pages` which takes the contents of a
-directly and shoves them into a special branch called `gh-pages` (by default, you can change that if you like) which is then available as a websiste hosted by Github.
+Run `gulp build:prod` to build to project out to a directory called `prod`.
 
 *Have fun firing out Jekyll goodness to the world*
