@@ -6,3 +6,4 @@ node_modules
 .publish
 .sass-cache/
 .jekyll-metadata
+src/_data/busters.json

@@ -8,5 +8,7 @@
     <div class="page-content">
       {{ content }}
     </div>
+
+    <script src="/assets/js/page.js{% if site.env == 'prod' %}?v={{ site.data.busters['js/page.js']}}{% endif %}" charset="utf-8"></script>
   </body>
 </html>

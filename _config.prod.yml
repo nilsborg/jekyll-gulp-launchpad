@@ -1,3 +1,5 @@
 # Change compile directory to production
 source: src
 destination: prod
+
+env: prod

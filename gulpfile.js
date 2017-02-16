@@ -5,9 +5,10 @@ const browserSync = require('browser-sync').create();
 const sass = require("gulp-sass");
 const notify = require("gulp-notify");
 const size = require("gulp-size");
-const ghPages = require('gulp-gh-pages');
 const autoprefixer = require('gulp-autoprefixer');
-const hashsum = require("gulp-hashsum");
+const cssnano = require('gulp-cssnano');
+const bust = require('gulp-buster');
+
 
 /**
  * Building Jekyll Site
@@ -24,7 +25,7 @@ gulp.task("jekyll-rebuild", ["jekyll:dev"], function () {
 // Almost identical to the above task, but instead we load in the build configuration
 // that overwrites some of the settings in the regular configuration so that you
 // don"t end up publishing your drafts or future posts
-gulp.task("jekyll:prod", ["styles"], shell.task("bundle exec jekyll build --config _config.yml,_config.prod.yml"));
+gulp.task("jekyll:prod", ["cachebust"], shell.task("bundle exec jekyll build --config _config.yml,_config.prod.yml"));
 
 // These tasks will look for files that change while serving and will auto-regenerate or
 // reload the website accordingly. Update or add other files you need to be watched.
@@ -84,9 +85,21 @@ gulp.task("styles:prod", function () {
       browsers: ['last 4 versions'],
       cascade: false
     }))
-    .pipe(hashsum({filename: 'src/_data/cache_css.yml', hash: 'md5'}))
+    .pipe(cssnano())
     .pipe(gulp.dest("src/assets/css/"))
     .pipe(size({title: "styles"}));
+});
+
+/**
+ * Cache busting
+ */
+gulp.task("cachebust", ["styles:prod"], function() {
+  return gulp.src([
+    "src/assets/css/screen.css",
+    "src/assets/**/*.js"
+  ])
+    .pipe(bust({ relativePath: 'src/assets/' }))
+    .pipe(gulp.dest('src/_data/'));
 });
 
 /**
@@ -105,9 +118,4 @@ function errorHandler (error) {
 // Default task, run when just writing "gulp" in the terminal
 gulp.task("default", ["serve:dev", "watch"]);
 
-gulp.task('deploy', ["jekyll:prod"], function() {
-  return gulp.src('./prod/**/*')
-    .pipe(ghPages({
-      branch: "gh-pages"
-    }));
-});
+gulp.task("build:prod", ["jekyll:prod"]);
